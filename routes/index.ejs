@@ -1,0 +1,42 @@
+<% layout('layout') %>
+
+<!-- Formulário de Adicionar Cliente -->
+<form action="/save" method="POST">
+  <p>
+    <label
+      >Nome:
+      <input type="text" name="name" required />
+    </label>
+  </p>
+  <p>
+    <label
+      >Idade:
+      <input type="number" name="age" required />
+    </label>
+  </p>
+  <p>
+    <input type="submit" value="Salvar" />
+  </p>
+</form>
+
+<hr />
+
+<!-- Lista de Clientes -->
+<h2>Lista de Clientes</h2>
+<ul>
+  <% customers.forEach(customer => { %>
+  <li>
+    <%= customer.name %> - <%= customer.age %> anos
+    <form
+      action="/update/<%= customer._id %>"
+      method="POST"
+      style="display: inline"
+    >
+      <input type="text" name="name" placeholder="Novo nome" />
+      <input type="number" name="age" placeholder="Nova idade" />
+      <button type="submit">Atualizar</button>
+    </form>
+    <a href="/delete/<%= customer._id %>">🗑 Excluir</a>
+  </li>
+  <% }) %>
+</ul>
