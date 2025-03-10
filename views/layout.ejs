@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      <%= typeof title !== 'undefined' ? title : 'Sistema de Cadastro' %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>
+        <%= typeof title !== 'undefined' ? title : 'Sistema de Cadastro' %>
+      </h1>
+    </header>
+
+    <main>
+      <%- body %>
+      <!-- Aqui será inserido o conteúdo de cada página -->
+    </main>
+  </body>
+</html>

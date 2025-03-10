@@ -3,6 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var ejsLayouts = require("express-ejs-layouts"); // Missing EJS layouts middleware
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -11,7 +12,9 @@ var app = express();
 
 // Configuração do view engine para usar EJS
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs"); // Usando EJS em vez de Pug
+app.set("view engine", "ejs");
+app.use(ejsLayouts); // Add this line to enable layouts
+app.set("layout", "layout"); // Set default layout
 
 app.use(logger("dev"));
 app.use(express.json());

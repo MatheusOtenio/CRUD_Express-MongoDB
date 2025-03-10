@@ -1,51 +1,44 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
-  <body>
-    <h1><%= title %></h1>
+<!-- Formulário de Adicionar Cliente -->
+<form action="/save" method="POST">
+  <p>
+    <label
+      >Nome:
+      <input type="text" name="name" required />
+    </label>
+  </p>
+  <p>
+    <label
+      >Idade:
+      <input type="number" name="age" required />
+    </label>
+  </p>
+  <p>
+    <input type="submit" value="Salvar" />
+  </p>
+</form>
 
-    <!-- Formulário de Adicionar Cliente -->
-    <form action="/save" method="POST">
-      <p>
-        <label
-          >Nome:
-          <input type="text" name="name" required />
-        </label>
-      </p>
-      <p>
-        <label
-          >Idade:
-          <input type="number" name="age" required />
-        </label>
-      </p>
-      <p>
-        <input type="submit" value="Salvar" />
-      </p>
+<hr />
+
+<!-- Lista de Clientes -->
+<h2>Lista de Clientes</h2>
+<% if (customers && customers.length > 0) { %>
+<ul>
+  <% customers.forEach(customer => { %>
+  <li>
+    <%= customer.name %> - <%= customer.age %> anos
+    <form
+      action="/update/<%= customer._id %>"
+      method="POST"
+      style="display: inline"
+    >
+      <input type="text" name="name" placeholder="Novo nome" />
+      <input type="number" name="age" placeholder="Nova idade" />
+      <button type="submit">Atualizar</button>
     </form>
-
-    <hr />
-
-    <!-- Lista de Clientes -->
-    <h2>Lista de Clientes</h2>
-    <ul>
-      <% customers.forEach(customer => { %>
-      <li>
-        <%= customer.name %> - <%= customer.age %> anos
-        <form
-          action="/update/<%= customer._id %>"
-          method="POST"
-          style="display: inline"
-        >
-          <input type="text" name="name" placeholder="Novo nome" />
-          <input type="number" name="age" placeholder="Nova idade" />
-          <button type="submit">Atualizar</button>
-        </form>
-        <a href="/delete/<%= customer._id %>">🗑 Excluir</a>
-      </li>
-      <% }) %>
-    </ul>
-  </body>
-</html>
+    <a href="/delete/<%= customer._id %>">🗑 Excluir</a>
+  </li>
+  <% }) %>
+</ul>
+<% } else { %>
+<p>Nenhum cliente cadastrado.</p>
+<% } %>
